@@ -12,6 +12,7 @@ async function insertAngleToDb(hour, minute, angle){
 
     const today = new Date();
     const insertDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+    if(minute == null) minute = 0;
 
     const insertQuery = "INSERT INTO angle_requests (req_hour, req_minute, req_angle, req_date) VALUES ($1, $2, $3, $4)";
 

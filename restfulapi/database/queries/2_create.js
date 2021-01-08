@@ -2,7 +2,7 @@ const pg = require('pg');
 
 async function createTable(){
     
-    const client = new pg.Client({
+    const db = new pg.Client({
         user: 'postgres',
         host: 'localhost',
         database: 'postgres',

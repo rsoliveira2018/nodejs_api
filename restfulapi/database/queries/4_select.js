@@ -10,6 +10,8 @@ async function getAngleFromDb(hour, minute){
         port: 5432
     });
 
+    if(minute == null) minute = 0;
+
     await db.connect();
     const result = await db.query("SELECT * FROM angle_requests WHERE req_hour = $1 AND req_minute = $2;", [hour, minute]);
     await db.end();
