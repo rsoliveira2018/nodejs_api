@@ -14,19 +14,24 @@ router.get('/:hour/:minute?', (req, res) =>{
             message: "the 'hour' or 'minute' were not informed correctly."
         });
     }
-
-    clockRepository.getAngleFromDb(clock).then(function(result){
-        if(result){
-            res.status(200).send({
-                angle: result
-            });
-        }else{
-            clockRepository.insertAngleToDb(clock);
-            res.status(200).send({
-                angle: clock.calculateAngle()
-            });
-        }
-    });
+    
+    try{
+        clockRepository.getAngleFromDb(clock).then(function(result){
+            if(result){
+                res.status(200).send({
+                    angle: result
+                });
+            }else{
+                clockRepository.insertAngleToDb(clock);
+                res.status(200).send({
+                    angle: clock.calculateAngle()
+                });
+            }
+        });
+    }catch(err){
+        console.log(err.message);
+    }
+    
 });
 
 module.exports = router;
