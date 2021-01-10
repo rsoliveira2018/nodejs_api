@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "7467c589-bea4-454b-9ea1-9701ca41023f",
+		"name": "ClockAPI",
+		"description": "ClockAPI - Restful API\r\n\r\nThis API contains a single endpoint \"{{urlpath}}/rest/clock/{{hour}}/{{minute}}, which is responsible for receiving two values, the first representing the hour (required) and the second one representing the minute of a set of hands in an analogic clock, responding with the angle formed between both hands.\r\n\r\nThe usage can be seen as depicted by Postman documentation, but in this published docs there is also an enviroment providing the default values for the case where you run the API on your own machine.\r\n\r\nYou will be able to check the files, read more about it and download the project on the GitHub repository on the following link: https://github.com/rsoliveira2018/nodejs_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /rest/clock/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"if(pm.response.code === 200){    \r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.test(\"The response body for success is correct\", () => {\r",
+							"        pm.response.to.have.body(\"{\\\"angle\\\":\" + responseJson.angle + \"}\");\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"The returned angle is a number\", () => {\r",
+							"        pm.expect(responseJson.angle).to.be.a(\"number\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"if(pm.response.code === 400){\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.test(\"The response body for bad request is correct\", () => {\r",
+							"        pm.response.to.have.body(\"{\\\"message\\\":\\\"\" + responseJson.message + \"\\\"}\");\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"The error message returned is a string\", () => {\r",
+							"        pm.expect(responseJson.message).to.be.a(\"string\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlpath}}/rest/clock/{{hour}}/{{minute}}",
+					"host": [
+						"{{urlpath}}"
+					],
+					"path": [
+						"rest",
+						"clock",
+						"{{hour}}",
+						"{{minute}}"
+					]
+				},
+				"description": "As can be seen, the endpoint accepts two values, hour and minute, being the first required and the second optional.\r\nSome request examples are as shown below:\r\n\r\n\r\nhttp://localhost:8080/rest/clock/9/30  --> for 09:30 and result {\"angle\":105}\r\n\r\nhttp://localhost:8080/rest/clock/8/12  --> for 08:12 and result {\"angle\":174}\r\n\r\nhttp://localhost:8080/rest/clock/3     --> for 03:00 and result {\"angle\":90}\r\n\r\nIf the second value, minute, is left blank, then the value 0 is assumed in its place.\r\n\r\n\r\nNote: no military hours are allowed, if sent so, a status code 400 (Bad Request) will be returned. Example:\r\n\r\nhttp://localhost:8080/rest/clock/15/40     --> for 15:40 and result \r\n{\"message\":\"the 'hour' or 'minute' were not informed correctly.\"}\r\nIn such cases, it is advised to switch to the request down below:\r\n\r\nhttp://localhost:8080/rest/clock/3/40     --> for 15:40 and result {\"angle\":130}\r\n"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
