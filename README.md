@@ -22,4 +22,4 @@ Uma vez que tenha sido executado o passo-a-passo da inicialização da API:
   "angle": 90
 }
 
-Obs.: A API possui documentação Postman com testes de API e está publicada no link: https://documenter.getpostman.com/view/7191226/TVzREHfp
+Obs.: A API possui documentação Postman com testes de API e está publicada no link: https://documenter.getpostman.com/view/7191226/TVzREccp
