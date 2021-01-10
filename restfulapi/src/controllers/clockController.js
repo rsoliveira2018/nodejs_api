@@ -1,6 +1,4 @@
 const express = require('express');
-const insertAngleToDb = require('../../database/queries/3_insert');
-const getAngleFromDb = require('../../database/queries/4_select');
 const router = express.Router();
 
 const Clock = require('../models/clock');

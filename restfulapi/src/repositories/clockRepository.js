@@ -1,17 +1,14 @@
-const pg = require('pg');
+const PostgreSQLConnection = require('../../database/postgresql');
 
 class ClockRepository{
     
     constructor() { }
 
     async getAngleFromDb(clock){
-        const db = new pg.Client({
-            user: 'postgres',
-            host: 'localhost',
-            database: 'postgres',
-            password: 'rsoliveira',
-            port: 5432
-        });
+
+        const db = PostgreSQLConnection.GetNewConnection();
+
+
 
         await db.connect();
         const result = await db.query("SELECT * FROM angle_requests WHERE req_hour = $1 AND req_minute = $2;", [clock.hour, clock.minute]);
@@ -26,13 +23,7 @@ class ClockRepository{
 
     async insertAngleToDb(clock){
 
-        const db = new pg.Client({
-            user: 'postgres',
-            host: 'localhost',
-            database: 'postgres',
-            password: 'rsoliveira',
-            port: 5432
-        });
+        const db = PostgreSQLConnection.GetNewConnection();
     
         const today = new Date();
         const insertDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
