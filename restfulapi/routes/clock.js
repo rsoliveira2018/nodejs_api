@@ -1,11 +1,12 @@
 const express = require('express');
-const insertAngleToDb = require('../../database/queries/3_insert');
-const getAngleFromDb = require('../../database/queries/4_select');
+const insertAngleToDb = require('../database/queries/3_insert');
+const getAngleFromDb = require('../database/queries/4_select');
 const router = express.Router();
 
 router.get('/:hour/:minute?', (req, res) =>{
     const hour = req.params.hour;
     const minute = req.params.minute;
+    if (minute == null) minute = 0;
 
     if(!hourMinuteIsValid(hour, minute)){
         res.status(400).send({

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const clockRoute = require('./routes/rest/clock');
+const clockRoute = require('./routes/clock');
 
 app.use('/rest/clock', clockRoute);
 
