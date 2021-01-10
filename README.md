@@ -8,7 +8,7 @@ São pré-requisitos para utilização desta API e devem estar instalados na má
 
 # PARA INICIALIZAÇÃO
 1. Realize o clone deste repositório do GitHub
-2. Navegue via console até o diretório ~\nodejs_api\restfulapi\
+2. Navegue via console até o diretório ~\nodejs_api-{{branch-name}}\restfulapi\
 3. Execute o comand: #npm install
 4. Na sequência da finalização do comando anterior, execute: #node server.js
 5. Verifique a URL exibida no console para saber onde fazer as requisições
